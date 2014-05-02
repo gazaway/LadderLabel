@@ -6,9 +6,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -22,7 +19,7 @@ public class ImagePanel extends JPanel{
     
     public ImagePanel() {
         try {
-            image = ImageIO.read(new File("img/LadderWoz.jpg"));
+            image = ImageIO.read(new File("img/sinPlayback.png"));
         } catch (IOException e){
             System.out.println(e.toString());
         }
@@ -30,10 +27,19 @@ public class ImagePanel extends JPanel{
     
     protected void paintComponent(Graphics g){
     	Graphics2D g2 = (Graphics2D)g;
-        int newW = 717;
-        int newH = 650;
+        double newW = 0;
+        double newH = 0;
+        if (image.getWidth() > image.getHeight()){
+        	newW = this.getWidth();
+        	newH = ((double)image.getHeight() * ((double)newW / (double)image.getWidth()));
+        }
+        else {
+        	newH = this.getHeight();
+        	newW = (image.getWidth() * (newH / image.getHeight()));
+        	System.out.println("Width < " + newW + " " + newH);
+        }
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                             RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(image, 0, 0, newW, newH, null);
+        g2.drawImage(image, (this.getWidth() - image.getWidth())/2, (this.getHeight() - image.getHeight())/2, (int)newW, (int)newH, null);
     }
 }
