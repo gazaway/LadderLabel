@@ -74,6 +74,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Crop.png"))); // NOI18N
         jButton5.setText("Crop Image");
+        
+        //CROP BUTTON ACTION LISTENER!!
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -234,7 +236,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }
-
+    
+    
+    //CROP BUTTON ACTION LISTENER!!
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
     	System.out.println("Crop hit.");
     }
