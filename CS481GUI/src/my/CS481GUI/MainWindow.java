@@ -1,5 +1,7 @@
 package my.CS481GUI;
 
+import java.awt.Cursor;
+
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -256,6 +258,7 @@ public class MainWindow extends javax.swing.JFrame {
     	}
     	//FILL IN WITH CROP FUNCTIONALITY
     	System.out.println("Crop hit.");
+    	imagePanel.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
     }
     
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
