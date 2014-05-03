@@ -82,8 +82,15 @@ public class MainWindow extends javax.swing.JFrame {
         //CROP BUTTON ACTION LISTENER!!
         cropButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                cropButtonActionPerformed(evt);
             }
+        });
+        
+        //AutoEdit Button Action Listener
+        autoEditButton.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		autoEditButtonActionPerformed(evt);
+        	}
         });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(controlPanel);
@@ -243,18 +250,28 @@ public class MainWindow extends javax.swing.JFrame {
     
     
     //CROP BUTTON ACTION LISTENER!!
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void cropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
     	if (tips){
-    		createTipsWindow("Click and drag on image to crop.");
+    		createTipsWindow("Click and drag on image to \n crop.");
     	}
+    	//FILL IN WITH CROP FUNCTIONALITY
     	System.out.println("Crop hit.");
+    }
+    
+    private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	if (tips){
+    		createTipsWindow("The four checkboxes change\n which aspects of the image\n are auto-corrected.");
+    	}
+    	//FILL IN WITH AUTOEDIT FUNCTIONALITY
+    	System.out.println("Autoedit hit.");
     }
     
     public void createTipsWindow(String in){
     	JCheckBox tipCheck = new JCheckBox("Check to turn off tips");
-    	JLabel spacer = new JLabel("                                                                         ");
-    	Object[] params = {in, spacer, tipCheck};
-    	JOptionPane.showMessageDialog(null, params, "Tip", JOptionPane.OK_OPTION);
+    	JLabel spacer = new JLabel("\n");
+    	JLabel spacer2 = new JLabel("\n");
+    	Object[] params = {in, spacer, spacer2, tipCheck};
+    	JOptionPane.showMessageDialog(this, params, "Tip", JOptionPane.OK_OPTION);
     	tips = !tipCheck.isSelected();
     }
 

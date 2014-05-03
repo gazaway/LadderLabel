@@ -19,7 +19,7 @@ public class ImagePanel extends JPanel{
     
     public ImagePanel() {
         try {
-            image = ImageIO.read(new File("img/sinPlayback.png"));
+            image = ImageIO.read(new File("img/LadderWoz.jpg"));
         } catch (IOException e){
             System.out.println(e.toString());
         }
@@ -45,7 +45,6 @@ public class ImagePanel extends JPanel{
         }
         else {
         	g2.drawImage(image, 0, (this.getHeight() - image.getHeight())/2, (int)newW, (int)newH, null);
-        }
-        
+        }  
     }
 }
