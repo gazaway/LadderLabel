@@ -3,6 +3,7 @@ package my.CS481GUI;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,10 +19,12 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel{
     
     private BufferedImage image;
+    Rectangle clip;
+    boolean showClip;
     
     public ImagePanel() {
         try {
-            image = ImageIO.read(new File("img/sinPlayback.png"));
+            image = ImageIO.read(new File("img/LadderWoz.jpg"));
         } catch (IOException e){
             System.out.println(e.toString());
         }
