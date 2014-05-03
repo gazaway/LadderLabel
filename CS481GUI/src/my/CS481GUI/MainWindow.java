@@ -14,139 +14,139 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jSlider1 = new javax.swing.JSlider();
-        jSlider2 = new javax.swing.JSlider();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        containerPanel = new javax.swing.JPanel();
+        controlPanel = new javax.swing.JPanel();
+        bightnessSlider = new javax.swing.JSlider();
+        contrastSlider = new javax.swing.JSlider();
+        brightnessCheck = new javax.swing.JCheckBox();
+        contrastCheck = new javax.swing.JCheckBox();
+        cropCheck = new javax.swing.JCheckBox();
+        labelCheck = new javax.swing.JCheckBox();
+        autoEditButton = new javax.swing.JButton();
+        ladderDropdown = new javax.swing.JComboBox();
+        brightLabel = new javax.swing.JLabel();
+        conLabel = new javax.swing.JLabel();
+        geneSelLabel = new javax.swing.JLabel();
+        autoOptionsLabel = new javax.swing.JLabel();
+        manualOptionsLabel = new javax.swing.JLabel();
+        cropButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jPanel4 = new ImagePanel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        imagePanel = new ImagePanel();
+        buttonPanel = new javax.swing.JPanel();
+        openButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LadderLabel 1.0c");
 
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 724));
+        containerPanel.setOpaque(false);
+        containerPanel.setPreferredSize(new java.awt.Dimension(900, 724));
 
-        jCheckBox1.setText(" Brightness");
+        brightnessCheck.setText(" Brightness");
 
-        jCheckBox2.setText(" Contrast");
+        contrastCheck.setText(" Contrast");
 
-        jCheckBox3.setText(" Cropping");
+        cropCheck.setText(" Cropping");
 
-        jCheckBox4.setText(" Label");
+        labelCheck.setText(" Label");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Edit.png"))); // NOI18N
-        jButton1.setText("Auto Edit");
+        autoEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Edit.png"))); // NOI18N
+        autoEditButton.setText("Auto Edit");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "           --   Must Select!   --", "GeneRuler 1 kb DNA Ladder" }));
-        jComboBox2.setMinimumSize(new java.awt.Dimension(200, 20));
-        jComboBox2.setPreferredSize(new java.awt.Dimension(200, 20));
+        ladderDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "           --   Must Select!   --", "GeneRuler 1 kb DNA Ladder" }));
+        ladderDropdown.setMinimumSize(new java.awt.Dimension(200, 20));
+        ladderDropdown.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        jLabel1.setText("Brightness");
+        brightLabel.setText("Brightness");
 
-        jLabel2.setText("Contrast");
+        conLabel.setText("Contrast");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Gene Ladder Selection");
+        geneSelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        geneSelLabel.setText("Gene Ladder Selection");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Auto Edit Options");
+        autoOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        autoOptionsLabel.setText("Auto Edit Options");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Manual Edit Options");
+        manualOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        manualOptionsLabel.setText("Manual Edit Options");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Crop.png"))); // NOI18N
-        jButton5.setText("Crop Image");
+        cropButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Crop.png"))); // NOI18N
+        cropButton.setText("Crop Image");
         
         //CROP BUTTON ACTION LISTENER!!
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        cropButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(controlPanel);
+        controlPanel.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addComponent(ladderDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brightLabel)
+                    .addComponent(conLabel)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
+                    .addComponent(geneSelLabel)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton5)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                    .addComponent(jSlider2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1))
+                    .addComponent(autoOptionsLabel)
+                    .addComponent(manualOptionsLabel)
+                    .addComponent(cropButton)
+                    .addComponent(bightnessSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(contrastSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(brightnessCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contrastCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cropCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(autoEditButton))
                 .addGap(46, 46, 46))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel3)
+                .addComponent(geneSelLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ladderDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addComponent(manualOptionsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(brightLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bightnessSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(conLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contrastSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
+                .addComponent(cropButton)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addComponent(autoOptionsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(brightnessCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(contrastCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(cropCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox4)
+                .addComponent(labelCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(autoEditButton)
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 717, Short.MAX_VALUE)
@@ -156,30 +156,30 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/open.gif"))); // NOI18N
-        jButton2.setText("Open");
-        jButton2.setToolTipText("Open Image *Disabled in alpha!*");
-        jButton2.setEnabled(false);
+        openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/open.gif"))); // NOI18N
+        openButton.setText("Open");
+        openButton.setToolTipText("Open Image *Disabled in alpha!*");
+        openButton.setEnabled(false);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Save.png"))); // NOI18N
-        jButton3.setText("Save");
-        jButton3.setToolTipText("Save (cntrl+S)");
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Save.png"))); // NOI18N
+        saveButton.setText("Save");
+        saveButton.setToolTipText("Save (cntrl+S)");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Undo.png"))); // NOI18N
-        jButton4.setText("Undo");
-        jButton4.setToolTipText("Undo (cntrl+Z)");
+        undoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Undo.png"))); // NOI18N
+        undoButton.setText("Undo");
+        undoButton.setToolTipText("Undo (cntrl+Z)");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(buttonPanel);
+        buttonPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(openButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(undoButton)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -187,23 +187,23 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(openButton)
+                    .addComponent(saveButton)
+                    .addComponent(undoButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(containerPanel);
+        containerPanel.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(controlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,11 +211,11 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -224,13 +224,13 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1077, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1077, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -273,28 +273,28 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton autoEditButton;
+    private javax.swing.JButton openButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton undoButton;
+    private javax.swing.JButton cropButton;
+    private javax.swing.JCheckBox brightnessCheck;
+    private javax.swing.JCheckBox contrastCheck;
+    private javax.swing.JCheckBox cropCheck;
+    private javax.swing.JCheckBox labelCheck;
+    private javax.swing.JComboBox ladderDropdown;
+    private javax.swing.JLabel brightLabel;
+    private javax.swing.JLabel conLabel;
+    private javax.swing.JLabel geneSelLabel;
+    private javax.swing.JLabel autoOptionsLabel;
+    private javax.swing.JLabel manualOptionsLabel;
+    private javax.swing.JPanel containerPanel;
+    private javax.swing.JPanel buttonPanel;
+    private javax.swing.JPanel imagePanel;
+    private javax.swing.JPanel controlPanel;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
+    private javax.swing.JSlider bightnessSlider;
+    private javax.swing.JSlider contrastSlider;
     // End of variables declaration
 }

@@ -40,6 +40,12 @@ public class ImagePanel extends JPanel{
         }
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                             RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(image, (this.getWidth() - image.getWidth())/2, (this.getHeight() - image.getHeight())/2, (int)newW, (int)newH, null);
+        if (image.getHeight() > image.getWidth()){
+        	g2.drawImage(image, (this.getWidth() - image.getWidth())/2, 0, (int)newW, (int)newH, null);
+        }
+        else {
+        	g2.drawImage(image, 0, (this.getHeight() - image.getHeight())/2, (int)newW, (int)newH, null);
+        }
+        
     }
 }
