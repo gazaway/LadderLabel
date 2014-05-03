@@ -257,8 +257,7 @@ public class MainWindow extends javax.swing.JFrame {
     		createTipsWindow("Click and drag on image to \n crop.");
     	}
     	//FILL IN WITH CROP FUNCTIONALITY
-    	System.out.println("Crop hit.");
-    	imagePanel.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+    	imagePanel.runCrop();
     }
     
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +324,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel manualOptionsLabel;
     private javax.swing.JPanel containerPanel;
     private javax.swing.JPanel buttonPanel;
-    private javax.swing.JPanel imagePanel;
+    private ImagePanel imagePanel;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

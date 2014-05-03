@@ -1,11 +1,13 @@
 package my.CS481GUI;
 
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -19,10 +21,14 @@ public class ImagePanel extends JPanel{
     
     public ImagePanel() {
         try {
-            image = ImageIO.read(new File("img/LadderWoz.jpg"));
+            image = ImageIO.read(new File("img/sinPlayback.png"));
         } catch (IOException e){
             System.out.println(e.toString());
         }
+    }
+    
+    public void runCrop(){
+    	this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
     }
     
     protected void paintComponent(Graphics g){
@@ -31,7 +37,7 @@ public class ImagePanel extends JPanel{
         double newH = 0;
         if (image.getWidth() > image.getHeight()){
         	newW = this.getWidth();
-        	newH = ((double)image.getHeight() * ((double)newW / (double)image.getWidth()));
+        	newH = (image.getHeight() * (newW / image.getWidth()));
         }
         else {
         	newH = this.getHeight();
