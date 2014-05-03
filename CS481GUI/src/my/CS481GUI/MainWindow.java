@@ -1,5 +1,9 @@
 package my.CS481GUI;
 
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jim
@@ -240,7 +244,18 @@ public class MainWindow extends javax.swing.JFrame {
     
     //CROP BUTTON ACTION LISTENER!!
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    	if (tips){
+    		createTipsWindow("Click and drag on image to crop.");
+    	}
     	System.out.println("Crop hit.");
+    }
+    
+    public void createTipsWindow(String in){
+    	JCheckBox tipCheck = new JCheckBox("Check to turn off tips");
+    	JLabel spacer = new JLabel("                                                                         ");
+    	Object[] params = {in, spacer, tipCheck};
+    	JOptionPane.showMessageDialog(null, params, "Tip", JOptionPane.OK_OPTION);
+    	tips = !tipCheck.isSelected();
     }
 
     public static void main(String args[]) {
@@ -296,5 +311,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSlider bightnessSlider;
     private javax.swing.JSlider contrastSlider;
+    static boolean tips = true;
     // End of variables declaration
 }
