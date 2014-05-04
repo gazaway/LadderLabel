@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel {
 
 	private BufferedImage image;
-	double scaled = 0;
+	double scaledY = 0, scaledX = 0, scaled = 0;
 	private Rectangle rect = null;
 	private boolean drawing = false;
 	private boolean allowDraw = false;
@@ -38,13 +38,13 @@ public class ImagePanel extends JPanel {
 	}
 	
 	public void setImage(String in){
+		this.removeAll();
 		try {
 			image = ImageIO.read(new File(in));
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
 		Graphics g = getGraphics();
-		this.removeAll();
 		paintComponent(g);
 		repaint();
 	}
@@ -73,21 +73,24 @@ public class ImagePanel extends JPanel {
 			if (rect == null) {
 				return;
 			} else if (drawing) {
-				g2.setColor(Color.red);
+				g2.setColor(new Color(0, 154, 255));
 				Stroke oldStroke = g2.getStroke();
 				g2.setStroke(new BasicStroke(3));
 				g2.draw(rect);
 			} else {
-				g2.setColor(Color.red);
+				g2.setColor(new Color(0, 154, 255));
 				Stroke oldStroke = g2.getStroke();
 				g2.setStroke(new BasicStroke(3));
 				g2.draw(rect);
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
-				image = image.getSubimage((int) (rect.x - dx), (int) (rect.y - dy),
-						(int) (rect.width/scaled),
-						(int) (rect.height/scaled));
+				this.removeAll();
+				//image = image.getSubimage((int) (rect.x - dx), (int) (rect.y - dy),
+						//(int) (rect.width/scaled),
+						//(int) (rect.height/scaled));
+				image = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
 				drawImage(g2);
+				repaint();
 				allowDraw = false;
 				removeMouseListener(mouseAdapter);
 				rect = null;
@@ -98,7 +101,7 @@ public class ImagePanel extends JPanel {
 	private void drawImage(Graphics2D g2) {
 		double newW = 0;
 		double newH = 0;
-		if (image.getWidth() > image.getHeight()) {
+		/*if (image.getWidth() > image.getHeight()) {
 			newW = this.getWidth();
 			scaled = newW / image.getWidth();
 			newH = (image.getHeight() * scaled);
@@ -115,7 +118,12 @@ public class ImagePanel extends JPanel {
 			dx = 0;
 			dy = ((this.getHeight() - image.getHeight()) / 2);
 		}
-		g2.drawImage(image, dx, dy, (int) newW, (int) newH, null);
+		g2.drawImage(image, dx, dy, (int) newW, (int) newH, null);*/
+		
+		//THIS STRETCHES THE IMAGE TO FILL THE PANEL ALL THE WAY
+		scaledX = this.getWidth()/image.getWidth();
+		scaledY = this.getHeight()/image.getHeight();
+		g2.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
 	private class MyMouseAdapter extends MouseAdapter {
