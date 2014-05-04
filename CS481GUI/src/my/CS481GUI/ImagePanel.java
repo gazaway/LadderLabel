@@ -46,6 +46,7 @@ public class ImagePanel extends JPanel {
 		Graphics g = getGraphics();
 		this.removeAll();
 		paintComponent(g);
+		repaint();
 	}
 	
 	public ImagePanel() {
