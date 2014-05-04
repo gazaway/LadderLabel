@@ -1,8 +1,12 @@
 package my.CS481GUI;
 
 import java.awt.Cursor;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -94,6 +98,19 @@ public class MainWindow extends javax.swing.JFrame {
         		autoEditButtonActionPerformed(evt);
         	}
         });
+        
+        //SaveButton Listener!
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        
+        openButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(jPanel5Layout);
@@ -172,7 +189,7 @@ public class MainWindow extends javax.swing.JFrame {
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/open.gif"))); // NOI18N
         openButton.setText("Open");
         openButton.setToolTipText("Open Image *Disabled in alpha!*");
-        openButton.setEnabled(false);
+        openButton.setEnabled(true);
 
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Save.png"))); // NOI18N
         saveButton.setText("Save");
@@ -260,12 +277,44 @@ public class MainWindow extends javax.swing.JFrame {
     	imagePanel.runCrop();
     }
     
+    //Save Button Functionality!! YAY
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	JFileChooser c = new JFileChooser();
+    	int rVal = c.showSaveDialog(this);
+    	if (rVal == JFileChooser.APPROVE_OPTION){
+    		filename = c.getSelectedFile().getName();
+    		dir = c.getCurrentDirectory().toString();
+    		String output = (dir + "\\" + filename + ".png");
+    		File out = new File(output);
+    		try {
+				ImageIO.write(imagePanel.getImage(), "png", out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    		
+    	}
+    }
+    
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	if (tips){
     		createTipsWindow("The four checkboxes change\n which aspects of the image\n are auto-corrected.");
     	}
     	//FILL IN WITH AUTOEDIT FUNCTIONALITY
     	System.out.println("Autoedit hit.");
+    }
+    
+    private void openButtonActionPerformed(java.awt.event.ActionEvent evt){
+    	JFileChooser c = new JFileChooser();
+    	int rVal = c.showOpenDialog(this);
+    	if (rVal == JFileChooser.APPROVE_OPTION){
+    		String open = "";
+    		//open += c.getCurrentDirectory();
+    		//open += "\\";
+    		open += c.getSelectedFile();
+    		System.out.println(open);
+    		imagePanel.setImage(open);
+    	}
+    	
     }
     
     public void createTipsWindow(String in){
@@ -331,5 +380,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSlider bightnessSlider;
     private javax.swing.JSlider contrastSlider;
     static boolean tips = true;
+    String filename = "";
+    String dir = "";
     // End of variables declaration
 }

@@ -33,6 +33,21 @@ public class ImagePanel extends JPanel {
 	int dx = 0;
 	int dy = 0;
 
+	public BufferedImage getImage(){
+		return image;
+	}
+	
+	public void setImage(String in){
+		try {
+			image = ImageIO.read(new File(in));
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+		Graphics g = getGraphics();
+		this.removeAll();
+		paintComponent(g);
+	}
+	
 	public ImagePanel() {
 		try {
 			image = ImageIO.read(new File("img/LadderWoz.jpg"));
@@ -69,8 +84,8 @@ public class ImagePanel extends JPanel {
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				image = image.getSubimage((int) (rect.x - dx), (int) (rect.y - dy),
-						(int) rect.width,
-						(int) rect.height);
+						(int) (rect.width/scaled),
+						(int) (rect.height/scaled));
 				drawImage(g2);
 				allowDraw = false;
 				removeMouseListener(mouseAdapter);
@@ -126,6 +141,5 @@ public class ImagePanel extends JPanel {
 			drawing = false;
 			repaint();
 		}
-
 	}
 }
