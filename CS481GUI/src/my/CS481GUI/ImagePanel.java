@@ -30,6 +30,8 @@ public class ImagePanel extends JPanel {
 	private boolean drawing = false;
 	private boolean allowDraw = false;
 	MyMouseAdapter mouseAdapter = new MyMouseAdapter();
+	int dx = 0;
+	int dy = 0;
 
 	public ImagePanel() {
 		try {
@@ -66,11 +68,9 @@ public class ImagePanel extends JPanel {
 				g2.draw(rect);
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
-				System.out.println(image.getHeight() + " " + image.getWidth());
-				image = image.getSubimage((int) rect.x, (int) rect.y,
-						(int) (rect.width / scaled),
-						(int) (rect.height / scaled));
-				System.out.println(image.getHeight() + " " + image.getWidth());
+				image = image.getSubimage((int) (rect.x - dx), (int) (rect.y - dy),
+						(int) rect.width,
+						(int) rect.height);
 				drawImage(g2);
 				allowDraw = false;
 				removeMouseListener(mouseAdapter);
@@ -92,13 +92,14 @@ public class ImagePanel extends JPanel {
 			newW = (image.getWidth() * scaled);
 		}
 		if (image.getHeight() > image.getWidth()) {
-			g2.drawImage(image, ((this.getWidth() - image.getWidth()) / 2), 0,
-					(int) newW, (int) newH, null);
+			dx = ((this.getWidth() - image.getWidth()) / 2);
+			dy = 0;
+			
 		} else {
-			g2.drawImage(image, 0,
-					((this.getHeight() - image.getHeight()) / 2), (int) newW,
-					(int) newH, null);
+			dx = 0;
+			dy = ((this.getHeight() - image.getHeight()) / 2);
 		}
+		g2.drawImage(image, dx, dy, (int) newW, (int) newH, null);
 	}
 
 	private class MyMouseAdapter extends MouseAdapter {
