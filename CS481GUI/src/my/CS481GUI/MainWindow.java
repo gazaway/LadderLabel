@@ -315,6 +315,7 @@ public class MainWindow extends javax.swing.JFrame {
     	}
     }
     
+    //AUTOEDIT BUTTON HIT
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		if (newImage()) {
 			if (checkLadder()) {
@@ -327,13 +328,13 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 	}
     
+    //OPEN BUTTON HIT
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt){
     	JFileChooser c = new JFileChooser();
     	int rVal = c.showOpenDialog(this);
     	if (rVal == JFileChooser.APPROVE_OPTION){
     		String open = "";
     		open += c.getSelectedFile();
-    		System.out.println(open);
     		imagePanel.setImage(open);
     		newImage = true;
     	}
