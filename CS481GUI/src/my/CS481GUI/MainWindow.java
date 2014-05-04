@@ -1,5 +1,6 @@
 package my.CS481GUI;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.IOException;
@@ -48,10 +49,22 @@ public class MainWindow extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         undoButton = new javax.swing.JButton();
 
+        this.setBackground(Color.white);
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LadderLabel 1.0c");
-
-        containerPanel.setOpaque(false);
+        
+        controlPanel.setOpaque(true);
+        controlPanel.setBackground(Color.white);
+        
+        imagePanel.setOpaque(true);
+        imagePanel.setBackground(Color.white);
+        
+        buttonPanel.setOpaque(true);
+        buttonPanel.setBackground(Color.white);
+        
+        containerPanel.setOpaque(true);
+        containerPanel.setBackground(Color.white);
         containerPanel.setPreferredSize(new java.awt.Dimension(900, 724));
 
         brightnessCheck.setText(" Brightness");
@@ -188,7 +201,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/open.gif"))); // NOI18N
         openButton.setText("Open");
-        openButton.setToolTipText("Open Image *Disabled in alpha!*");
+        openButton.setToolTipText("Open Image (cntrl+O");
         openButton.setEnabled(true);
 
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Save.png"))); // NOI18N
