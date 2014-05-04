@@ -85,9 +85,8 @@ public class ImagePanel extends JPanel {
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				this.removeAll();
-				//image = image.getSubimage((int) (rect.x - dx), (int) (rect.y - dy),
-						//(int) (rect.width/scaled),
-						//(int) (rect.height/scaled));
+				System.out.println(image.getWidth() + " " + image.getHeight());
+				System.out.println(rect.getWidth()/scaledX + " " + rect.getHeight()/scaledY);
 				image = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
 				drawImage(g2);
 				repaint();
@@ -97,32 +96,31 @@ public class ImagePanel extends JPanel {
 			}
 		}
 	}
+	
+	private BufferedImage resizeImage(BufferedImage originalImage, int width, int height, int type) throws IOException {  
+        BufferedImage resizedImage = new BufferedImage(width, height, type);  
+        Graphics2D g = resizedImage.createGraphics();  
+        g.drawImage(originalImage, 0, 0, width, height, null);  
+        g.dispose();  
+        return resizedImage;  
+    }  
 
 	private void drawImage(Graphics2D g2) {
 		double newW = 0;
 		double newH = 0;
-		/*if (image.getWidth() > image.getHeight()) {
-			newW = this.getWidth();
-			scaled = newW / image.getWidth();
-			newH = (image.getHeight() * scaled);
-		} else {
-			newH = this.getHeight();
-			scaled = newH / image.getHeight();
-			newW = (image.getWidth() * scaled);
-		}
-		if (image.getHeight() > image.getWidth()) {
-			dx = ((this.getWidth() - image.getWidth()) / 2);
-			dy = 0;
-			
-		} else {
-			dx = 0;
-			dy = ((this.getHeight() - image.getHeight()) / 2);
-		}
-		g2.drawImage(image, dx, dy, (int) newW, (int) newH, null);*/
 		
 		//THIS STRETCHES THE IMAGE TO FILL THE PANEL ALL THE WAY
-		scaledX = this.getWidth()/image.getWidth();
-		scaledY = this.getHeight()/image.getHeight();
+		System.out.println("Image width: " + image.getWidth() + "   Image height: " + image.getHeight());
+		System.out.println("Panel width: " + this.getWidth() + "Panel height: " + this.getHeight());
+		scaledX = (double)(this.getWidth()/image.getWidth());
+		scaledY = (double)(this.getHeight()/image.getHeight());
+		System.out.println(scaledX + " " + scaledY);
+		try {
+			image = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		g2.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
