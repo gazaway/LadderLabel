@@ -48,21 +48,9 @@ public class ImagePanel extends JPanel {
 
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		double newW = 0;
-		double newH = 0;
-		if (image.getWidth() > image.getHeight()) {
-			newW = this.getWidth();
-			scaled = newW / image.getWidth();
-			newH = (image.getHeight() * (newW / image.getWidth()));
-		} else {
-			newH = this.getHeight();
-			scaled = newH / image.getHeight();
-			newW = (image.getWidth() * (newH / image.getHeight()));
-			System.out.println("Width < " + newW + " " + newH);
-		}
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		drawImage(g2, newW, newH);
+		drawImage(g2);
 		if (allowDraw) {
 			if (rect == null) {
 				return;
@@ -79,25 +67,37 @@ public class ImagePanel extends JPanel {
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				System.out.println(image.getHeight() + " " + image.getWidth());
-				image = image.getSubimage((int) rect.getLocation().getX(),
-						(int) rect.getLocation().getY(),
-						(int) (rect.getWidth() / scaled),
-						(int) (rect.getHeight() / scaled));
+				image = image.getSubimage((int) rect.x, (int) rect.y,
+						(int) (rect.width / scaled),
+						(int) (rect.height / scaled));
 				System.out.println(image.getHeight() + " " + image.getWidth());
-				drawImage(g2, newW, newH);
+				drawImage(g2);
 				allowDraw = false;
 				removeMouseListener(mouseAdapter);
+				rect = null;
 			}
 		}
 	}
 
-	private void drawImage(Graphics2D g2, double newW, double newH) {
-		if (image.getHeight() > image.getWidth()) {
-			g2.drawImage(image, 0, 0, (int) newW, (int) newH, null);
-			//g2.drawImage(image, ((this.getWidth() - image.getWidth()) / 2), 0, (int) newW, (int) newH, null);
+	private void drawImage(Graphics2D g2) {
+		double newW = 0;
+		double newH = 0;
+		if (image.getWidth() > image.getHeight()) {
+			newW = this.getWidth();
+			scaled = newW / image.getWidth();
+			newH = (image.getHeight() * scaled);
 		} else {
-			g2.drawImage(image, 0, 0, (int) newW, (int) newH, null);
-			//g2.drawImage(image, 0, ((this.getHeight() - image.getHeight()) / 2), (int) newW, (int) newH, null);
+			newH = this.getHeight();
+			scaled = newH / image.getHeight();
+			newW = (image.getWidth() * scaled);
+		}
+		if (image.getHeight() > image.getWidth()) {
+			g2.drawImage(image, ((this.getWidth() - image.getWidth()) / 2), 0,
+					(int) newW, (int) newH, null);
+		} else {
+			g2.drawImage(image, 0,
+					((this.getHeight() - image.getHeight()) / 2), (int) newW,
+					(int) newH, null);
 		}
 	}
 
@@ -116,7 +116,6 @@ public class ImagePanel extends JPanel {
 			int y = Math.min(mousePress.y, e.getPoint().y);
 			int width = Math.abs(mousePress.x - e.getPoint().x);
 			int height = Math.abs(mousePress.y - e.getPoint().y);
-
 			rect = new Rectangle(x, y, width, height);
 			repaint();
 		}
