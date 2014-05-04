@@ -65,6 +65,7 @@ public class ImagePanel extends JPanel {
 	}
 
 	protected void paintComponent(Graphics g) {
+		System.out.println(this.getWidth() + " " + this.getHeight());
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
