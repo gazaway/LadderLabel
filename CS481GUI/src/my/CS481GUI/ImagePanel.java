@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel{
     
     private BufferedImage image;
+    double scaled = 0;
     private Rectangle rect = null;
     private boolean drawing = false;
     private boolean allowDraw = false;
@@ -52,37 +53,48 @@ public class ImagePanel extends JPanel{
         double newH = 0;
         if (image.getWidth() > image.getHeight()){
         	newW = this.getWidth();
+        	scaled = newW / image.getWidth();
         	newH = (image.getHeight() * (newW / image.getWidth()));
         }
         else {
         	newH = this.getHeight();
+        	scaled = newH / image.getHeight();
         	newW = (image.getWidth() * (newH / image.getHeight()));
         	System.out.println("Width < " + newW + " " + newH);
         }
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        if (image.getHeight() > image.getWidth()){
-        	g2.drawImage(image, (this.getWidth() - image.getWidth())/2, 0, (int)newW, (int)newH, null);
-        }
-        else {
-        	g2.drawImage(image, 0, (this.getHeight() - image.getHeight())/2, (int)newW, (int)newH, null);
-        }
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        drawImage(g2, newW, newH);
 		if (allowDraw) {
 			if (rect == null) {
 				return;
 			} else if (drawing) {
 				g2.setColor(Color.red);
 				Stroke oldStroke = g2.getStroke();
-				g2.setStroke(new BasicStroke(5));
+				g2.setStroke(new BasicStroke(3));
 				g2.draw(rect);
 			} else {
 				g2.setColor(Color.red);
+				Stroke oldStroke = g2.getStroke();
+				g2.setStroke(new BasicStroke(3));
 				g2.draw(rect);
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
+				System.out.println(image.getHeight() + " " + image.getWidth());
+				image = image.getSubimage((int)rect.getLocation().getX(), (int)rect.getLocation().getY(), (int)(rect.getWidth()/scaled), (int)(rect.getHeight()/scaled));
+				System.out.println(image.getHeight() + " " + image.getWidth());
+				drawImage(g2, newW, newH);
 				allowDraw = false;
 			}
 		}
     }
+	private void drawImage(Graphics2D g2, double newW, double newH){
+		if (image.getHeight() > image.getWidth()){
+        	g2.drawImage(image, (this.getWidth() - image.getWidth())/2, 0, (int)newW, (int)newH, null);
+        }
+        else {
+        	g2.drawImage(image, 0, (this.getHeight() - image.getHeight())/2, (int)newW, (int)newH, null);
+        }
+	}
     private class MyMouseAdapter extends MouseAdapter {
         private Point mousePress = null; 
         @Override
