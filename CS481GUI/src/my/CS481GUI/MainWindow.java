@@ -2,11 +2,13 @@ package my.CS481GUI;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JComponent;
 import javax.swing.JSlider;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -147,6 +150,9 @@ public class MainWindow extends javax.swing.JFrame {
         	}
         });
         
+        // Save shortcut listener
+        
+       
         //SaveButton Listener!
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,16 +242,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/open.gif"))); // NOI18N
         openButton.setText("Open");
-        openButton.setToolTipText("Open Image (cntrl+O");
+        openButton.setToolTipText("Open Image");
         openButton.setEnabled(true);
 
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Save.png"))); // NOI18N
         saveButton.setText("Save");
-        saveButton.setToolTipText("Save (cntrl+S)");
+        saveButton.setToolTipText("Save Image");
 
         undoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Undo.png"))); // NOI18N
         undoButton.setText("Undo");
-        undoButton.setToolTipText("Undo (cntrl+Z)");
+        undoButton.setToolTipText("Undo Edit");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(buttonPanel);
         buttonPanel.setLayout(jPanel2Layout);
