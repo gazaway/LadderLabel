@@ -2,6 +2,8 @@ package my.CS481GUI;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -283,11 +285,14 @@ public class MainWindow extends javax.swing.JFrame {
     
     //CROP BUTTON ACTION LISTENER!!
     private void cropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    	if (tips){
-    		createTipsWindow("Click and drag on image to \n crop.");
-    	}
-    	//FILL IN WITH CROP FUNCTIONALITY
-    	imagePanel.runCrop();
+		if (checkLadder()) {
+			if (tips) {
+				createTipsWindow("Click and drag on image to \n crop.");
+			}
+			// FILL IN WITH CROP FUNCTIONALITY
+
+			imagePanel.runCrop();
+		}
     }
     
     //Save Button Functionality!! YAY
@@ -309,11 +314,13 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	if (tips){
-    		createTipsWindow("The four checkboxes change\n which aspects of the image\n are auto-corrected.");
-    	}
-    	//FILL IN WITH AUTOEDIT FUNCTIONALITY
-    	System.out.println("Autoedit hit.");
+		if (checkLadder()) {
+			if (tips) {
+				createTipsWindow("The four checkboxes change\n which aspects of the image\n are auto-corrected.");
+			}
+			// FILL IN WITH AUTOEDIT FUNCTIONALITY
+			System.out.println("Autoedit hit.");
+		}
     }
     
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt){
@@ -328,6 +335,14 @@ public class MainWindow extends javax.swing.JFrame {
     		imagePanel.setImage(open);
     	}
     	
+    }
+    
+    public boolean checkLadder(){
+    	if (ladderDropdown.getSelectedIndex() == 0){
+    		JOptionPane.showMessageDialog(this, "We recommend that you select your gene ladder before continuing.");
+    		return false;
+    	}
+		return true;
     }
     
     public void createTipsWindow(String in){
