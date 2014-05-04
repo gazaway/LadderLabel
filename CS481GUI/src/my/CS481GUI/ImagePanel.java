@@ -85,8 +85,6 @@ public class ImagePanel extends JPanel {
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				this.removeAll();
-				System.out.println(image.getWidth() + " " + image.getHeight());
-				System.out.println(rect.getWidth()/scaledX + " " + rect.getHeight()/scaledY);
 				image = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
 				drawImage(g2);
 				repaint();
@@ -108,17 +106,11 @@ public class ImagePanel extends JPanel {
 	private void drawImage(Graphics2D g2) {
 		double newW = 0;
 		double newH = 0;
-		
-		//THIS STRETCHES THE IMAGE TO FILL THE PANEL ALL THE WAY
-		System.out.println("Image width: " + image.getWidth() + "   Image height: " + image.getHeight());
-		System.out.println("Panel width: " + this.getWidth() + "Panel height: " + this.getHeight());
 		scaledX = (double)(this.getWidth()/image.getWidth());
 		scaledY = (double)(this.getHeight()/image.getHeight());
-		System.out.println(scaledX + " " + scaledY);
 		try {
 			image = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g2.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
