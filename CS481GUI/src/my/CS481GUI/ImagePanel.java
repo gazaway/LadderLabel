@@ -102,7 +102,7 @@ public class ImagePanel extends JPanel {
 	}
 	
 	public void changeBrightness(int val){
-		RescaleOp op = new RescaleOp((float)(1.0 + (val / 1000.0)), 0, null);
+		RescaleOp op = new RescaleOp((float)(1.0 + (val / 100.0)), 0, null);
 		image = op.filter(copy, image);
 		repaint();
 	}

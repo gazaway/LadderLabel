@@ -58,14 +58,30 @@ public class MainWindow extends javax.swing.JFrame {
         
         brightnessSlider.addChangeListener(new ChangeListener() {
         	public void stateChanged(ChangeEvent e) {
-        		imagePanel.changeBrightness(brightnessSlider.getValue());
-        	}
+				if (newImage()) {
+					if (checkLadder()) {
+						JSlider source = (JSlider) e.getSource();
+						if (!source.getValueIsAdjusting()) {
+							int gain = source.getValue();
+							imagePanel.changeBrightness(gain);
+						}
+					}
+				}
+			}
         });
         
         contrastSlider.addChangeListener(new ChangeListener() {
-        	public void stateChanged(ChangeEvent e) {
-        		imagePanel.changeContrast(contrastSlider.getValue());
-        	}
+			public void stateChanged(ChangeEvent e) {
+				if (newImage()) {
+					if (checkLadder()) {
+						JSlider source = (JSlider) e.getSource();
+						if (!source.getValueIsAdjusting()) {
+							int gain = source.getValue();
+							imagePanel.changeContrast(gain);
+						}
+					}
+				}
+			}
         });
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
