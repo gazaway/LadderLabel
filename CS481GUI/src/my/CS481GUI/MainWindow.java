@@ -284,14 +284,16 @@ public class MainWindow extends javax.swing.JFrame {
     
     
     //CROP BUTTON ACTION LISTENER!!
-    private void cropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-		if (checkLadder()) {
-			if (tips) {
-				createTipsWindow("Click and drag on image to \n crop.");
-			}
-			// FILL IN WITH CROP FUNCTIONALITY
+    private void cropButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		if (newImage()) {
+			if (checkLadder()) {
+				if (tips) {
+					createTipsWindow("Click and drag on image to \n crop.");
+				}
+				// FILL IN WITH CROP FUNCTIONALITY
 
-			imagePanel.runCrop();
+				imagePanel.runCrop();
+			}
 		}
     }
     
@@ -314,27 +316,38 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		if (checkLadder()) {
-			if (tips) {
-				createTipsWindow("The four checkboxes change\n which aspects of the image\n are auto-corrected.");
+		if (newImage()) {
+			if (checkLadder()) {
+				if (tips) {
+					createTipsWindow("The four checkboxes change\n which aspects of the image\n are auto-corrected.");
+				}
+				// FILL IN WITH AUTOEDIT FUNCTIONALITY
+				System.out.println("Autoedit hit.");
 			}
-			// FILL IN WITH AUTOEDIT FUNCTIONALITY
-			System.out.println("Autoedit hit.");
 		}
-    }
+	}
     
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt){
     	JFileChooser c = new JFileChooser();
     	int rVal = c.showOpenDialog(this);
     	if (rVal == JFileChooser.APPROVE_OPTION){
     		String open = "";
-    		//open += c.getCurrentDirectory();
-    		//open += "\\";
     		open += c.getSelectedFile();
     		System.out.println(open);
     		imagePanel.setImage(open);
+    		newImage = true;
     	}
     	
+    }
+    
+    public boolean newImage(){
+    	if (newImage){
+    		return true;
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Use the Open button to open a new image.");
+    		return false;
+    	}
     }
     
     public boolean checkLadder(){
@@ -408,6 +421,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSlider bightnessSlider;
     private javax.swing.JSlider contrastSlider;
     static boolean tips = true;
+    boolean newImage = false;
     String filename = "";
     String dir = "";
     // End of variables declaration
