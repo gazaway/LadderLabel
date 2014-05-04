@@ -7,11 +7,14 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JSlider;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -29,7 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         containerPanel = new javax.swing.JPanel();
         controlPanel = new javax.swing.JPanel();
-        bightnessSlider = new javax.swing.JSlider();
+        brightnessSlider = new javax.swing.JSlider(-20,20);
         contrastSlider = new javax.swing.JSlider();
         brightnessCheck = new javax.swing.JCheckBox();
         contrastCheck = new javax.swing.JCheckBox();
@@ -52,6 +55,18 @@ public class MainWindow extends javax.swing.JFrame {
         undoButton = new javax.swing.JButton();
 
         this.setBackground(Color.white);
+        
+        brightnessSlider.addChangeListener(new ChangeListener() {
+        	public void stateChanged(ChangeEvent e) {
+        		imagePanel.changeBrightness(brightnessSlider.getValue());
+        	}
+        });
+        
+        contrastSlider.addChangeListener(new ChangeListener() {
+        	public void stateChanged(ChangeEvent e) {
+        		imagePanel.changeContrast(contrastSlider.getValue());
+        	}
+        });
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LadderLabel 1.0c");
@@ -143,7 +158,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(autoOptionsLabel)
                     .addComponent(manualOptionsLabel)
                     .addComponent(cropButton)
-                    .addComponent(bightnessSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(brightnessSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(contrastSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(brightnessCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(contrastCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,7 +181,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(brightLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bightnessSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(brightnessSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(conLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -419,7 +434,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSlider bightnessSlider;
+    private javax.swing.JSlider brightnessSlider;
     private javax.swing.JSlider contrastSlider;
     static boolean tips = true;
     boolean newImage = false;

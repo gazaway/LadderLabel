@@ -12,6 +12,7 @@ import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel {
 
 	private BufferedImage image;
+	private BufferedImage copy;
 	double scaledY = 0, scaledX = 0, scaled = 0;
 	private Rectangle rect = null;
 	private boolean drawing = false;
@@ -41,6 +43,7 @@ public class ImagePanel extends JPanel {
 		this.removeAll();
 		try {
 			image = ImageIO.read(new File(in));
+			copy = ImageIO.read(new File(in));
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -52,6 +55,7 @@ public class ImagePanel extends JPanel {
 	public ImagePanel() {
 		try {
 			image = ImageIO.read(new File("img/LadderWoz.jpg"));
+			copy = ImageIO.read(new File("img/LadderWoz.jpg"));
 		} catch (IOException e) {
 			System.out.println(e.toString());
 		}
@@ -86,6 +90,7 @@ public class ImagePanel extends JPanel {
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				this.removeAll();
 				image = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
+				copy = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
 				drawImage(g2);
 				repaint();
 				allowDraw = false;
@@ -93,6 +98,19 @@ public class ImagePanel extends JPanel {
 				rect = null;
 			}
 		}
+		copy = image;
+	}
+	
+	public void changeBrightness(int val){
+		RescaleOp op = new RescaleOp((float)(1.0 + (val / 1000.0)), 0, null);
+		image = op.filter(copy, image);
+		repaint();
+	}
+	
+	public void changeContrast(int val){
+		RescaleOp op = new RescaleOp(0, val, null);
+		image = op.filter(copy, image);
+		repaint();
 	}
 	
 	private BufferedImage resizeImage(BufferedImage originalImage, int width, int height, int type) throws IOException {  
@@ -110,6 +128,7 @@ public class ImagePanel extends JPanel {
 		scaledY = (double)(this.getHeight()/image.getHeight());
 		try {
 			image = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			copy = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
