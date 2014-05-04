@@ -61,10 +61,10 @@ public class MainWindow extends javax.swing.JFrame {
 				if (newImage()) {
 					if (checkLadder()) {
 						JSlider source = (JSlider) e.getSource();
-						if (!source.getValueIsAdjusting()) {
+						//if (!source.getValueIsAdjusting()) {
 							int gain = source.getValue();
 							imagePanel.changeBrightness(gain);
-						}
+						//}
 					}
 				}
 			}
@@ -75,10 +75,10 @@ public class MainWindow extends javax.swing.JFrame {
 				if (newImage()) {
 					if (checkLadder()) {
 						JSlider source = (JSlider) e.getSource();
-						if (!source.getValueIsAdjusting()) {
+						//if (!source.getValueIsAdjusting()) {
 							int gain = source.getValue();
 							imagePanel.changeContrast(gain);
-						}
+						//}
 					}
 				}
 			}

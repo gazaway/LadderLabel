@@ -95,11 +95,10 @@ public class ImagePanel extends JPanel {
 				rect = null;
 			}
 		}
-		copy = image;
 	}
 	
 	public void changeBrightness(int val){
-		RescaleOp op = new RescaleOp((float)(1.0 + (val / 100.0)), 0, null);
+		RescaleOp op = new RescaleOp((float)(1.0 + (val / 10.0)), 0, null);
 		image = op.filter(copy, image);
 		repaint();
 	}
@@ -123,7 +122,7 @@ public class ImagePanel extends JPanel {
 		scaledY = (double)(this.getHeight()/image.getHeight());
 		try {
 			image = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-			copy = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			copy = resizeImage(copy, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
