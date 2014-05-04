@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.swing.JSlider;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -53,7 +54,8 @@ public class MainWindow extends javax.swing.JFrame {
         openButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         undoButton = new javax.swing.JButton();
-
+        ImageIcon img = new ImageIcon("img/DNA2.png");
+        this.setIconImage(img.getImage());
         this.setBackground(Color.white);
         
         brightnessSlider.addChangeListener(new ChangeListener() {
