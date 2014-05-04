@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -78,19 +77,17 @@ public class ImagePanel extends JPanel {
 				return;
 			} else if (drawing) {
 				g2.setColor(new Color(0, 154, 255));
-				Stroke oldStroke = g2.getStroke();
 				g2.setStroke(new BasicStroke(3));
 				g2.draw(rect);
 			} else {
 				g2.setColor(new Color(0, 154, 255));
-				Stroke oldStroke = g2.getStroke();
 				g2.setStroke(new BasicStroke(3));
 				g2.draw(rect);
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				this.removeAll();
 				image = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
-				copy = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
+				copy = copy.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
 				drawImage(g2);
 				repaint();
 				allowDraw = false;
@@ -122,8 +119,6 @@ public class ImagePanel extends JPanel {
     }  
 
 	private void drawImage(Graphics2D g2) {
-		double newW = 0;
-		double newH = 0;
 		scaledX = (double)(this.getWidth()/image.getWidth());
 		scaledY = (double)(this.getHeight()/image.getHeight());
 		try {
