@@ -24,9 +24,7 @@ import javax.swing.JPanel;
  */
 public class ImagePanel extends JPanel {
 
-	/**
-	 * 
-	 */
+	private BufferedImage[] undo = new BufferedImage[10];
 	private static final long serialVersionUID = 1L;
 	private BufferedImage image;
 	private BufferedImage copy;
@@ -37,9 +35,32 @@ public class ImagePanel extends JPanel {
 	MyMouseAdapter mouseAdapter = new MyMouseAdapter();
 	float bright = 0;
 	int con = 0;
+	int undoCtr = 0;
 
 	public BufferedImage getImage(){
 		return image;
+	}
+	
+	public void callLastImage(){
+		BufferedImage temp;
+		if (undo.length != 0){
+			temp = undo[undoCtr%10];
+			undo[undoCtr%10] = null;
+			image = temp;
+			this.removeAll();
+			Graphics g = getGraphics();
+			Graphics2D g2 = (Graphics2D) g;
+			paintComponent(g);
+			repaint();
+		}
+	}
+	
+	public void setUndoImage(){
+		undo[undoCtr%10] = image;
+		undoCtr++;
+		for (int i = 0; i < undo.length; i++)
+			if (undo[i] != null)
+				System.out.println(i + " ");
 	}
 	
 	public void setImage(String in){
@@ -52,6 +73,8 @@ public class ImagePanel extends JPanel {
 		}
 		Graphics g = getGraphics();
 		paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		drawImage(g2);
 		repaint();
 	}
 	
@@ -72,10 +95,12 @@ public class ImagePanel extends JPanel {
 	}
 	
 	public void setBright(float val){
+		setUndoImage();
 		bright = val;
 	}
 	
 	public void setContrast(int val){
+		setUndoImage();
 		con = val;
 	}
 
@@ -99,6 +124,7 @@ public class ImagePanel extends JPanel {
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				this.removeAll();
+				setUndoImage();
 				image = image.getSubimage((int)(rect.getX()), (int)(rect.getY()), (int)(rect.getWidth()), (int)(rect.getHeight()));
 				copy = copy.getSubimage((int)(rect.getX()), (int)(rect.getY()), (int)(rect.getWidth()), (int)(rect.getHeight()));
 				drawImage(g2);

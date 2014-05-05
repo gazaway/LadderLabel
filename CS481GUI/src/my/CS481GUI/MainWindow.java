@@ -32,7 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private void initComponents() {
-
+    	//declare components
         containerPanel = new javax.swing.JPanel();
         containerPanel.setPreferredSize(new Dimension(1000,1000));
         controlPanel = new javax.swing.JPanel();
@@ -60,7 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
         ImageIcon img = new ImageIcon("img/DNA2.png");
         this.setIconImage(img.getImage());
         this.setBackground(Color.white);
-        
+        //brightness slider functionality
         brightnessSlider.addChangeListener(new ChangeListener() {
         	public void stateChanged(ChangeEvent e) {
 				if (newImage()) {
@@ -78,7 +78,7 @@ public class MainWindow extends javax.swing.JFrame {
 				}
 			}
         });
-        
+        //contrast slider functionality
         contrastSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if (newImage()) {
@@ -94,85 +94,67 @@ public class MainWindow extends javax.swing.JFrame {
 				}
 			}
         });
-        
+        //set component values
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LadderLabel 1.0c");
-        
+        setTitle("LadderLabel v1.0c");   
         controlPanel.setOpaque(true);
-        controlPanel.setBackground(Color.white);
-
-        
+        controlPanel.setBackground(Color.white);  
         imagePanel.setOpaque(true);
-        imagePanel.setBackground(Color.white);
-        
+        imagePanel.setBackground(Color.white);  
         buttonPanel.setOpaque(true);
-        buttonPanel.setBackground(Color.white);
-        
+        buttonPanel.setBackground(Color.white);     
         containerPanel.setOpaque(true);
         containerPanel.setBackground(Color.white);
         containerPanel.setPreferredSize(new java.awt.Dimension(900, 724));
-
         brightnessCheck.setText(" Brightness");
-
         contrastCheck.setText(" Contrast");
-
         cropCheck.setText(" Cropping");
-
         labelCheck.setText(" Label");
-
         autoEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Edit.png"))); // NOI18N
         autoEditButton.setText("Auto Edit");
-
         ladderDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "           --   Must Select!   --", "GeneRuler 1 kb DNA Ladder" }));
         ladderDropdown.setMinimumSize(new java.awt.Dimension(200, 20));
         ladderDropdown.setPreferredSize(new java.awt.Dimension(200, 20));
-
         brightLabel.setText("Brightness");
-
         conLabel.setText("Contrast");
-
         geneSelLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         geneSelLabel.setText("Gene Ladder Selection");
-
         autoOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         autoOptionsLabel.setText("Auto Edit Options");
-
         manualOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         manualOptionsLabel.setText("Manual Edit Options");
-
         cropButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Crop.png"))); // NOI18N
         cropButton.setText("Crop Image");
-        
+        //undo button action
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		undoButtonActionPerformed(evt);
+        	}
+        });
         //CROP BUTTON ACTION LISTENER!!
         cropButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cropButtonActionPerformed(evt);
             }
         });
-        
         //AutoEdit Button Action Listener
         autoEditButton.addActionListener(new java.awt.event.ActionListener() {
         	public void actionPerformed(java.awt.event.ActionEvent evt) {
         		autoEditButtonActionPerformed(evt);
         	}
         });
-        
-        // Save shortcut listener
-        
-       
         //SaveButton Listener!
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
-        
+        //open button listener
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openButtonActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -235,7 +217,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(autoEditButton)
                 .addContainerGap(84, Short.MAX_VALUE))
         );
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(imagePanel);
         imagePanel.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -246,16 +227,16 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-
+        //open
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/open.gif"))); // NOI18N
         openButton.setText("Open");
         openButton.setToolTipText("Open Image");
         openButton.setEnabled(true);
-
+        //save
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Save.png"))); // NOI18N
         saveButton.setText("Save");
         saveButton.setToolTipText("Save Image");
-
+        //undo
         undoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Undo.png"))); // NOI18N
         undoButton.setText("Undo");
         undoButton.setToolTipText("Undo Edit");
@@ -327,7 +308,6 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }
     
-    
     //CROP BUTTON ACTION LISTENER!!
     private void cropButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		if (newImage()) {
@@ -336,29 +316,34 @@ public class MainWindow extends javax.swing.JFrame {
 					createTipsWindow("Click and drag on image to \n crop.");
 				}
 				// FILL IN WITH CROP FUNCTIONALITY
-
 				imagePanel.runCrop();
 			}
 		}
     }
     
+    //undo button funct
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	imagePanel.callLastImage();
+    }
+    
     //Save Button Functionality!! YAY
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	JFileChooser c = new JFileChooser();
-    	int rVal = c.showSaveDialog(this);
-    	if (rVal == JFileChooser.APPROVE_OPTION){
-    		filename = c.getSelectedFile().getName();
-    		dir = c.getCurrentDirectory().toString();
-    		String output = (dir + "\\" + filename + ".png");
-    		File out = new File(output);
-    		try {
-				ImageIO.write(imagePanel.getImage(), "png", out);
-			} catch (IOException e) {
-				e.printStackTrace();
+		if (newImage()) {
+			JFileChooser c = new JFileChooser();
+			int rVal = c.showSaveDialog(this);
+			if (rVal == JFileChooser.APPROVE_OPTION) {
+				filename = c.getSelectedFile().getName();
+				dir = c.getCurrentDirectory().toString();
+				String output = (dir + "\\" + filename + ".png");
+				File out = new File(output);
+				try {
+					ImageIO.write(imagePanel.getImage(), "png", out);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-    		
-    	}
-    }
+		}
+	}
     
     //AUTOEDIT BUTTON HIT
     private void autoEditButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,8 +367,7 @@ public class MainWindow extends javax.swing.JFrame {
     		open += c.getSelectedFile();
     		imagePanel.setImage(open);
     		newImage = true;
-    	}
-    	
+    	} 	
     }
     
     public boolean newImage(){
@@ -433,7 +417,6 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
