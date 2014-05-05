@@ -35,6 +35,8 @@ public class ImagePanel extends JPanel {
 	private boolean drawing = false;
 	private boolean allowDraw = false;
 	MyMouseAdapter mouseAdapter = new MyMouseAdapter();
+	float bright = 0;
+	int con = 0;
 
 	public BufferedImage getImage(){
 		return image;
@@ -68,6 +70,14 @@ public class ImagePanel extends JPanel {
 		this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		allowDraw = true;
 	}
+	
+	public void setBright(float val){
+		bright = val;
+	}
+	
+	public void setContrast(int val){
+		con = val;
+	}
 
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -100,14 +110,14 @@ public class ImagePanel extends JPanel {
 		}
 	}
 	
-	public void changeBrightness(int val){
-		RescaleOp op = new RescaleOp((float)(1.0 + (val / 10.0)), 0, null);
+	public void changeBrightness(float val){
+		RescaleOp op = new RescaleOp((float) (1.0 + (val / 10.0)), con, null);
 		image = op.filter(copy, image);
 		repaint();
 	}
 	
 	public void changeContrast(int val){
-		RescaleOp op = new RescaleOp(0, val, null);
+		RescaleOp op = new RescaleOp(bright, val, null);
 		image = op.filter(copy, image);
 		repaint();
 	}

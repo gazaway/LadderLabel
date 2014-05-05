@@ -37,7 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
         containerPanel.setPreferredSize(new Dimension(1000,1000));
         controlPanel = new javax.swing.JPanel();
         brightnessSlider = new javax.swing.JSlider(-20,20);
-        contrastSlider = new javax.swing.JSlider();
+        contrastSlider = new javax.swing.JSlider(-100,100);
         brightnessCheck = new javax.swing.JCheckBox();
         contrastCheck = new javax.swing.JCheckBox();
         cropCheck = new javax.swing.JCheckBox();
@@ -66,9 +66,10 @@ public class MainWindow extends javax.swing.JFrame {
 				if (newImage()) {
 					if (checkLadder()) {
 						JSlider source = (JSlider) e.getSource();
-						int gain = source.getValue();
+						float gain = (float)source.getValue();
 						imagePanel.changeBrightness(gain);
 						if (!source.getValueIsAdjusting()) {
+							imagePanel.setBright(gain);
 							//TYLER CAN USE THIS FOR HIS UNDO FUNCTION. THIS POINT WOULD BE WERE YOU WOULD
 							//RECORD THE IMAGE, BECAUSE IT IS WHERE THE SLIDER HAS STOPPED MOVING AND THE
 							//USER HAS RELEASED THE MOUSE
@@ -86,6 +87,7 @@ public class MainWindow extends javax.swing.JFrame {
 						int gain = source.getValue();
 						imagePanel.changeContrast(gain);
 						if (!source.getValueIsAdjusting()) {
+							imagePanel.setContrast(gain);
 							//SAME THING AS ABOVE. BUT FOR CONTRAST
 						}
 					}
