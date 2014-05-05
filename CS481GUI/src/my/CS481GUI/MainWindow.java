@@ -335,7 +335,7 @@ public class MainWindow extends javax.swing.JFrame {
 			if (rVal == JFileChooser.APPROVE_OPTION) {
 				filename = c.getSelectedFile().getName();
 				dir = c.getCurrentDirectory().toString();
-				String output = (dir + "\\" + filename + ".png");
+				String output = (dir + "/" + filename + ".png");
 				File out = new File(output);
 				try {
 					ImageIO.write(imagePanel.getImage(), "png", out);
