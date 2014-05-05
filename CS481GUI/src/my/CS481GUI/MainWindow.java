@@ -1,14 +1,10 @@
 package my.CS481GUI;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JComponent;
 import javax.swing.JSlider;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -16,25 +12,29 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
  *
- * @author Jim
+ * @author Jim Gazaway
  */
 public class MainWindow extends javax.swing.JFrame {
 
 
-    public MainWindow() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public MainWindow() {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private void initComponents() {
 
         containerPanel = new javax.swing.JPanel();
+        containerPanel.setPreferredSize(new Dimension(1000,1000));
         controlPanel = new javax.swing.JPanel();
         brightnessSlider = new javax.swing.JSlider(-20,20);
         contrastSlider = new javax.swing.JSlider();
@@ -66,10 +66,13 @@ public class MainWindow extends javax.swing.JFrame {
 				if (newImage()) {
 					if (checkLadder()) {
 						JSlider source = (JSlider) e.getSource();
-						//if (!source.getValueIsAdjusting()) {
-							int gain = source.getValue();
-							imagePanel.changeBrightness(gain);
-						//}
+						int gain = source.getValue();
+						imagePanel.changeBrightness(gain);
+						if (!source.getValueIsAdjusting()) {
+							//TYLER CAN USE THIS FOR HIS UNDO FUNCTION. THIS POINT WOULD BE WERE YOU WOULD
+							//RECORD THE IMAGE, BECAUSE IT IS WHERE THE SLIDER HAS STOPPED MOVING AND THE
+							//USER HAS RELEASED THE MOUSE
+						}
 					}
 				}
 			}
@@ -80,10 +83,11 @@ public class MainWindow extends javax.swing.JFrame {
 				if (newImage()) {
 					if (checkLadder()) {
 						JSlider source = (JSlider) e.getSource();
-						//if (!source.getValueIsAdjusting()) {
-							int gain = source.getValue();
-							imagePanel.changeContrast(gain);
-						//}
+						int gain = source.getValue();
+						imagePanel.changeContrast(gain);
+						if (!source.getValueIsAdjusting()) {
+							//SAME THING AS ABOVE. BUT FOR CONTRAST
+						}
 					}
 				}
 			}
@@ -94,6 +98,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         controlPanel.setOpaque(true);
         controlPanel.setBackground(Color.white);
+
         
         imagePanel.setOpaque(true);
         imagePanel.setBackground(Color.white);
@@ -124,13 +129,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         conLabel.setText("Contrast");
 
-        geneSelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        geneSelLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         geneSelLabel.setText("Gene Ladder Selection");
 
-        autoOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        autoOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         autoOptionsLabel.setText("Auto Edit Options");
 
-        manualOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        manualOptionsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         manualOptionsLabel.setText("Manual Edit Options");
 
         cropButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/CS481GUI/Crop.png"))); // NOI18N
@@ -298,7 +303,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        //.addGap(18, 18, 18)
                         .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -314,10 +319,9 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
+                //.addGap(0, 11, Short.MAX_VALUE))
         );
-
         pack();
     }
     
@@ -446,7 +450,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox contrastCheck;
     private javax.swing.JCheckBox cropCheck;
     private javax.swing.JCheckBox labelCheck;
-    private javax.swing.JComboBox ladderDropdown;
+    @SuppressWarnings("rawtypes")
+	private javax.swing.JComboBox ladderDropdown;
     private javax.swing.JLabel brightLabel;
     private javax.swing.JLabel conLabel;
     private javax.swing.JLabel geneSelLabel;

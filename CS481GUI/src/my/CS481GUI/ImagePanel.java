@@ -20,10 +20,14 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @author Jim
+ * @author Jim Gazaway
  */
 public class ImagePanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private BufferedImage image;
 	private BufferedImage copy;
 	double scaledY = 0, scaledX = 0, scaled = 0;
@@ -31,8 +35,6 @@ public class ImagePanel extends JPanel {
 	private boolean drawing = false;
 	private boolean allowDraw = false;
 	MyMouseAdapter mouseAdapter = new MyMouseAdapter();
-	int dx = 0;
-	int dy = 0;
 
 	public BufferedImage getImage(){
 		return image;
@@ -72,6 +74,7 @@ public class ImagePanel extends JPanel {
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		drawImage(g2);
+		
 		if (allowDraw) {
 			if (rect == null) {
 				return;
@@ -86,8 +89,8 @@ public class ImagePanel extends JPanel {
 				this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 				this.removeAll();
-				image = image.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
-				copy = copy.getSubimage((int)(rect.getX()/scaledX), (int)(rect.getY()/scaledY), (int)(rect.getWidth()/scaledX), (int)(rect.getHeight()/scaledY));
+				image = image.getSubimage((int)(rect.getX()), (int)(rect.getY()), (int)(rect.getWidth()), (int)(rect.getHeight()));
+				copy = copy.getSubimage((int)(rect.getX()), (int)(rect.getY()), (int)(rect.getWidth()), (int)(rect.getHeight()));
 				drawImage(g2);
 				repaint();
 				allowDraw = false;
@@ -118,15 +121,13 @@ public class ImagePanel extends JPanel {
     }  
 
 	private void drawImage(Graphics2D g2) {
-		scaledX = (double)(this.getWidth()/image.getWidth());
-		scaledY = (double)(this.getHeight()/image.getHeight());
 		try {
-			image = resizeImage(image, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-			copy = resizeImage(copy, this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			image = resizeImage(image, (this.getWidth()-3), (this.getHeight()-5), BufferedImage.TYPE_INT_ARGB);
+			copy = resizeImage(copy, (this.getWidth()-3), (this.getHeight()-5), BufferedImage.TYPE_INT_ARGB);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		g2.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+		g2.drawImage(image, 0, 0, this.getWidth()-3, this.getHeight()-5, null);
 	}
 
 	private class MyMouseAdapter extends MouseAdapter {
